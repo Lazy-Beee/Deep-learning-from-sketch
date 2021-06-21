@@ -1,6 +1,6 @@
 import sys
 import os
-from functions import *
+from common.functions import *
 sys.path.append(os.pardir)
 
 

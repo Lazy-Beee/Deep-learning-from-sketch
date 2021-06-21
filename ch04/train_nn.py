@@ -5,6 +5,10 @@ import matplotlib.pyplot as plt
 
 
 (x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, one_hot_label=True)
+
+# Use a small portion of data to decrease program run time
+(x_train, t_train) = (x_train[:100], t_train[:100])
+
 train_loss_list = []
 train_acc_list = []
 test_acc_list = []
@@ -12,7 +16,7 @@ test_acc_list = []
 # Super parameters
 iters_num = int(50)
 train_size = x_train.shape[0]
-batch_size = 100
+batch_size = 10
 learning_rate = 0.1
 
 iter_per_epoch = max(train_size / batch_size, 1)
@@ -47,11 +51,19 @@ for i in range(iters_num):
 
 # Plot the loss function
 markers = {'train': 'o', 'test': 's'}
-x = np.arange(len(train_loss_list))
-plt.plot(x, train_loss_list, label='train acc')
+x = np.arange(len(train_acc_list))
+plt.plot(x, train_acc_list, label='train acc')
 plt.plot(x, test_acc_list, label='test acc', linestyle='--')
 plt.xlabel("epochs")
 plt.ylabel("accuracy")
 plt.ylim(0, 1.0)
 plt.legend(loc='lower right')
+plt.savefig('fig_accuracy')
+plt.show()
+
+x = np.arange(len(train_loss_list))
+plt.plot(x, train_loss_list)
+plt.xlabel("iter")
+plt.ylabel("loss")
+plt.savefig('fig_loss')
 plt.show()
