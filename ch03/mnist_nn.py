@@ -4,7 +4,7 @@ import numpy as np
 import pickle
 sys.path.append(os.pardir)
 from dataset.mnist import load_mnist
-np.seterr( over='ignore' )
+np.seterr(over='ignore')
 
 
 def sigmoid(x): return 1.0/(1 + np.exp(-x))
@@ -47,24 +47,24 @@ def predict(network, x):
 
 
 """Batched prediction"""
-# x, t = get_data()
-# network = init_network()
-# batch_size = 100
-# accuracy_count = 0
-# for i in range(0, len(x), batch_size):
-#     x_batch = x[i:i+batch_size]
-#     y_batch = predict(network, x_batch)
-#     p = np.argmax(y_batch, axis=1)
-#     print(p)
-#     accuracy_count += np.sum(p == t[i:i+batch_size])
-# print(f'Accuracy: {str(float(accuracy_count)/len(x))}')
+for batch_size in range(10, 101, 10):
+    x, t = get_data()
+    network = init_network()
+    # batch_size = 100
+    accuracy_count = 0
+    for i in range(0, len(x), batch_size):
+        x_batch = x[i:i+batch_size]
+        y_batch = predict(network, x_batch)
+        p = np.argmax(y_batch, axis=1)
+        accuracy_count += np.sum(p == t[i:i+batch_size])
+    print(f'Batch size: {batch_size} Accuracy: {str(float(accuracy_count)/len(x))}')
 
 """Individual predictions"""
-x, t = get_data()
-network = init_network()
-accuracy_count = 0
-for i in range(0, len(x)):
-    y = predict(network, x[i])
-    p = np.argmax(y)
-    accuracy_count += p == t[i]
-print(f'Accuracy: {str(float(accuracy_count)/len(x))}')
+# x, t = get_data()
+# network = init_network()
+# accuracy_count = 0
+# for i in range(0, len(x)):
+#     y = predict(network, x[i])
+#     p = np.argmax(y)
+#     accuracy_count += p == t[i]
+# print(f'Accuracy: {str(float(accuracy_count)/len(x))}')
