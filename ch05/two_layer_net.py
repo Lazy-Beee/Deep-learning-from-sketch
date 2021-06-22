@@ -37,7 +37,7 @@ class TwoLayerNet:
         return self.lastLayer.forward(y, t)
 
     def accuracy(self, x, t):
-        """Calcualte accuracy of prediction"""
+        """Calculate accuracy of prediction"""
         y = self.predict(x)
         y = np.argmax(y, axis=1)
         if t.ndim != 1:
